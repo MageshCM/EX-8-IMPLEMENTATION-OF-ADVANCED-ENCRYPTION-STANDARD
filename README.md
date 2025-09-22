@@ -14,7 +14,48 @@ To use Advanced Encryption Standard (AES) Algorithm for a practical application 
 
 ## PROGRAM:
 
+```
+#include <stdio.h>
+#include <string.h>
+
+void xorEncryptDecrypt(char *text, char *key, char *result) {
+    int textLen = strlen(text);
+    int keyLen = strlen(key);
+    for (int i = 0; i < textLen; i++) {
+        result[i] = text[i] ^ key[i % keyLen];
+    }
+    result[textLen] = '\0';
+}
+
+int main() {
+    char plaintext[256], key[256], ciphertext[256], decrypted[256];
+
+    printf("Enter the plaintext : ");
+    fgets(plaintext, sizeof(plaintext), stdin);
+    plaintext[strcspn(plaintext, "\n")] = '\0';
+
+    printf("Enter the key: ");
+    fgets(key, sizeof(key), stdin);
+    key[strcspn(key, "\n")] = '\0';
+
+    xorEncryptDecrypt(plaintext, key, ciphertext);
+
+    printf("Ciphertext (ASCII values): ");
+    for (int i = 0; i < strlen(ciphertext); i++) {
+        printf("%d ", (unsigned char)ciphertext[i]);
+    }
+    printf("\n");
+
+    xorEncryptDecrypt(ciphertext, key, decrypted);
+    printf("Decrypted text: %s\n", decrypted);
+
+    return 0;
+}
+
+```
 ## OUTPUT:
+
+<img width="831" height="157" alt="image" src="https://github.com/user-attachments/assets/35903244-7408-453f-aa18-242f17131b6e" />
 
 ## RESULT:
 Hence, Advanced Encryption Standard (AES) Algorithm for a practical application like URL Encryption is done successfully.
